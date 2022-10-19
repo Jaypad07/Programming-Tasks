@@ -1,9 +1,7 @@
 package com.codegym.task.task13.task1319;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 /* 
