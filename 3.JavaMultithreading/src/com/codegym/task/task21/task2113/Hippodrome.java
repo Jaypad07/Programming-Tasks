@@ -12,8 +12,8 @@ public class Hippodrome {
     }
 
 
-    public static void main(String[] args) throws InterruptedException {
-        game = new Hippodrome(Arrays.asList(new Horse("Lucky", 3, 0), new Horse("Bullet", 3, 0 ), new Horse("Flash", 3, 0)));
+        public static void main(String[] args) throws InterruptedException {
+            game = new Hippodrome(Arrays.asList(new Horse("Lucky", 3, 0), new Horse("Bullet", 3, 0 ), new Horse("Flash", 3, 0)));
         game.run();
         game.printWinner();
     }
@@ -27,8 +27,8 @@ public class Hippodrome {
     }
 
     public void move() {
-        for (Horse run : horses) {
-            run.move();
+        for (Horse horse : horses) {
+            horse.move();
         }
     }
 
