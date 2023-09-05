@@ -12,6 +12,14 @@ public class Horse {
         this.distance = distance;
     }
 
+    public void move() {
+
+    }
+
+    public void print() {
+
+    }
+
     public String getName() {
         return name;
     }
