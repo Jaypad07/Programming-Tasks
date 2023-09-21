@@ -1,30 +1,47 @@
 package com.codegym.task.task24.task2413;
 
+/**
+ * The paddle is used to bounce back the ball.
+ */
 public class Paddle extends BaseObject {
-    private double speed;
-    private double direction;
+    // Picture for drawing
+    private static int[][] matrix = {
+            {1, 1, 1, 1, 1},
+            {1, 0, 0, 0, 1},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0},
+    };
+    // Speed
+    private double speed = 1;
+    // Direction (-1: to the left, +1: to the right)
+    private double direction = 0;
 
     public Paddle(double x, double y) {
         super(x, y, 3);
-        speed = 1;
-        direction = 0;
     }
 
-    @Override
-    public void draw(Canvas obj) {
+    /**
+     * This method moves the paddle according to the direction variable.
+     */
+    void move() {
+        double dx = speed * direction;
+        x = x + dx;
 
+        checkBorders(radius, Arkanoid.game.getWidth() - radius + 1, 1, Arkanoid.game.getHeight() + 1);
     }
 
-    @Override
-    public void move() {
-        x += direction * speed;
-    }
-
-    public void moveLeft() {
+    /**
+     * Set direction to -1
+     */
+    void moveLeft() {
         direction = -1;
     }
 
-    public void moveRight() {
+    /**
+     * Set direction to +1
+     */
+    void moveRight() {
         direction = 1;
     }
 
@@ -32,15 +49,15 @@ public class Paddle extends BaseObject {
         return speed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
     public double getDirection() {
         return direction;
     }
 
-    public void setDirection(double direction) {
-        this.direction = direction;
+    /**
+     * Draw the object on the canvas
+     */
+    @Override
+    void draw(Canvas canvas) {
+        canvas.drawMatrix(x - radius + 1, y, matrix, 'M');
     }
 }

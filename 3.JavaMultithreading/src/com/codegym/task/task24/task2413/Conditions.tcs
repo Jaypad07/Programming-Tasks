@@ -1,4 +1,18 @@
-taskKey="com.codegym.task.task24.task2413.big19"\n\nArkanoid (part 19)
+taskKey="com.codegym.task.task24.task2413.big20"\n\nArkanoid (part 20)
+
+
+Good work! I added a couple of methods, as well a KeyboardObserver.
+
+Take a little rest before the next level and play.
+
+P.S. Just don&#39;t forget to adjust the height of the console.
+
+
+Требования:
+1.	Relax and enjoy.
+
+
+Arkanoid (part 20)
 
 
 There&#39;s just a little bit left.
@@ -27,14 +41,8 @@ If the ball&#39;s y coordinate is greater than the height of the game field (hei
 If this happens, set the isGameOver variable to true.
 
 
-Требования:
-1.	The Arkanoid class must implement a checkBrickCollision() method in accordance with the task conditions.
-2.	The Arkanoid class must implement a checkPaddleCollision() method in accordance with the task conditions.
-3.	A private boolean isGameOver field must be created in the Arkanoid class.
-4.	The Arkanoid class must implement a checkGameOver() method in accordance with the task conditions.
 
-
-Arkanoid (part 19)
+Arkanoid (part 20)
 
 
 Now we&#39;ll return to the Arkanoid class.
@@ -47,7 +55,7 @@ In this method, you must call the draw method on all objects that have such a me
 
 
 
-Arkanoid (part 19)
+Arkanoid (part 20)
 
 
 The paddle also needs methods:
@@ -63,7 +71,7 @@ Just assign the correct value to the direction variable.
 
 
 
-Arkanoid (part 19)
+Arkanoid (part 20)
 
 
 And finally, the paddle!
@@ -82,7 +90,7 @@ direction = 0;
 
 
 
-Arkanoid (part 19)
+Arkanoid (part 20)
 
 
 You won&#39;t believe it, but we&#39;re still not done.
@@ -102,29 +110,6 @@ If it does, then it should bounce off.
 For this, we need one more method:
 void checkRebound(int minx, int maxx, int miny, int maxy)
 Declare it, and I&#39;ll handle the code myself.
-
-
-
-Arkanoid (part 19)
-
-
-The Ball class is missing something:
-
-First, you need to implement the move() method inherited from BaseObject:
-a) x should increase by dx each turn
-b) y must increase by dy each turn
-If the ball is frozen, then x and y should not change
-
-Second, you need to implement the draw(Canvas canvas) method:
-You need to call the canvas object&#39;s setPoint method with arguments (x, y, &#39;O&#39;)
-
-Third, you need to implement the start() method
-This call &quot;thaws&quot; the ball.
-You decide for yourself what you need to do to accomplish this.
-
-P.S. Oh, I almost forgot! The x, y, and radius fields are declared with the private access modifier in the BaseObject class,
-which isn&#39;t very convenient. Change the modifier to protected so that all of the BaseObject class&#39;s descendants can control their own
-coordinates and dimensions without the need to use &quot;foreign&quot; getters and setters.
 
 
 
