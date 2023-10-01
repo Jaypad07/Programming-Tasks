@@ -1,0 +1,111 @@
+taskKey="com.codegym.task.task36.task3608.big03"\n\nMVC (part 3)
+
+
+To understand whether you&#39;re heading in the right direction, you need to see the data. Therefore,
+1. In the view package, create a UsersView class that implements View. It will display the list of users.
+
+2. Create a controller field, and a corresponding setter, in UsersView.
+
+3. Implement the refresh method:
+3.1. Display the phrase &quot;All users:&quot;.
+3.2. Display all of the users in dataModel.
+Indent each user with a tab.
+3.3. Display the following visual separator at the end
+===================================================
+
+4. I&#39;m already interested in seeing what we&#39;ve got.
+Add to UsersView a public void fireShowAllUsersEvent() method that emulates a client event.
+Access the controller and call the appropriate method to display all users.
+
+5. The Solution class will emulate a user. Open the Solution class, go to the red method,
+and use IDEA&#39;s hot keys to create a usersView property (field).
+All you need is a setter. If you created a getter, delete it.
+
+6. Run main. Oops, nothing is displayed :(
+This is because the server sent the data, and it was updated in the DataModel, but the View doesn&#39;t know anything about it.
+The View can&#39;t update itself. The Controller does that.
+Go to the controller and update the View&#39;s data.
+Remember, the data is stored in the Model.
+
+7. Run main. I now have this output:
+All users:
+User{name=&#39;A&#39;, id=1, level=1}
+User{name=&#39;B&#39;, id=2, level=1}
+===================================================
+Hooray! Let&#39;s keep going.
+
+
+Требования:
+1.	A UsersView class that implements the View interface must be created in the view package.
+2.	A private Controller controller field and corresponding setter must be created in the UsersView class.
+3.	The UsersView class&#39;s refresh method must be implemented according to the task conditions.
+4.	The UsersView class must have a public void fireShowAllUsersEvent() method that must call the onShowAllUsers() method on the controller.
+5.	A private UsersView usersView field and corresponding setter must be created in the Controller class. A getter must not be created for this field.
+6.	The userView object&#39;s refresh method must be called in the Controller class&#39;s onShowAllUsers() method with model.getDataModel() as the argument, after a call to the loadUsers() method.
+7.	Calling the main method must display information about each of the users that you added in the FakeModel class&#39;s loadUsers() method.
+
+
+MVC (part 3)
+
+
+1. Create a controller package, and create a Controller class inside it.
+This class will receive requests from the client and notify the Model. The Model, in turn, will update the DataModel.
+
+2. Add a Model model field, along with a setter, to the controller.
+
+3. In the controller, create a public void onShowAllUsers() method that accesses the model and triggers the loading the users.
+
+4. Create a view package. Create a View interface inside it.
+
+5. Add two methods to the View interface: void refresh(DataModel dataModel) and void setController(Controller controller).
+
+
+
+MVC (part 3)
+
+
+Hi! This task will cover the Model-View-Controller (MVC) pattern.
+Together we are going to build an MVC architecture. Dive in deep to understand why you need to implement it the way that I show you.
+Read the additional literature that the professor will give you at the end of the level.
+You&#39;ll probably be asked about this pattern in an interview or will be given a task that will require you to implement it.
+
+Let&#39;s begin...
+You have two packages: bean, which has only one class called User, and dao,
+which contains database emulation code in the mock and UserDao packages. UserDao is a DAO layer (i.e. Database Access Object layer).
+It contains various methods for storing and retrieving objects from a database.
+A real application wouldn&#39;t have the line &quot;private DataSource dataSource = DataSource.getInstance()&quot;.
+I&#39;ve implemented DataSource as a singleton. In reality, you&#39;d have something more like this:
+@Autowired
+private DataSource dataSource;
+This framework you&#39;ll use in real applications will create the database object itself and initialize the dataSource field.
+
+Remember, services work with the DAO layer. No other classes touch the DAO. The business logic is described in services.
+Services retrieve data from the database using the DAO, process it, and hand it out to whoever requested the data.
+However, not all data is stored in a database. For example, a signed-in user will be stored in a special Model object.
+An object that contains data required to display information to the client is called the Model.
+Additionally, this Model object contains references to all of the required services.
+If there is a lot of data to display, then it is broken out into separate objects.
+
+Let&#39;s write an application that will display a list of users and do something with them, for example, update their data and delete them.
+
+1. Create a model package, and create a DataModel class inside it.
+DataModel is the entity that will store the data we need to display to the client.
+Create a List&lt;User&gt; users field, and a corresponding getter and setter. This will be the list of users to display.
+
+2. We should be able to use any model to get all of the data we need to display. So,
+in the model package, create a Model interface that has a DataModel getDataModel() method.
+
+3. Create a FakeModel class that implements Model in the model package. We&#39;re going to need this in the initial stage.
+Give it a DataModel dataModel field, and initialize it with the object.
+
+4. Create a void loadUsers() method in the Model interface.
+Implement it in FakeModel: use arbitrary data to initialize the list of users for dataModel. The data won&#39;t affect testing.
+I have the following data:
+User{name=&#39;A&#39;, id=1, level=1}
+User{name=&#39;B&#39;, id=2, level=1}
+I think you&#39;ll remember that all interface methods are public, so there&#39;s no need to indicate a modifier.
+Programmers often use fake data in early development. They implement code to get real data in the final stages.
+The hardcoded fake data replaces real objects.
+
+
+
