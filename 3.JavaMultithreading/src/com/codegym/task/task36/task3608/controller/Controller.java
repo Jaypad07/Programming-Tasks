@@ -12,6 +12,11 @@ public class Controller {
         usersView.refresh(model.getDataModel());
     }
 
+    public void onShowAllDeletedUsers() {
+        model.loadDeletedUsers();
+        usersView.refresh(model.getDataModel());
+    }
+
     public Model getModel() {
         return model;
     }

@@ -1,4 +1,60 @@
-taskKey="com.codegym.task.task36.task3608.big03"\n\nMVC (part 3)
+taskKey="com.codegym.task.task36.task3608.big05"\n\nMVC (part 5)
+
+
+The service has a method that returns all deleted users. Let&#39;s display them.
+
+1. Assign each of these methods to the correct MVC classes:
+
+public void fireShowDeletedUsersEvent() {
+...onShowAllDeletedUsers();
+}
+
+public void onShowAllDeletedUsers() {
+...loadDeletedUsers();
+}
+
+public void loadDeletedUsers() {
+List&lt;User&gt; users = userService.getAllDeletedUsers();
+}
+
+Don&#39;t forget that the data received from the server must be stored in the DataModel. And then, update the view.
+Add this to the correct methods on your own.
+
+2. In Solution.main, call the new method that you put in the view.
+
+3. Add the method that you put in the Model to the Model interface, and implement it in FakeModel: throw an UnsupportedOperationException.
+
+
+Требования:
+1.	You need to determine the correct location for the fireShowDeletedUsersEvent() method, and implement it.
+2.	You need to determine the correct location for the onShowAllDeletedUsers() method, and implement it.
+3.	You must determine the correct location for the loadDeletedUsers() method, and implement it.
+4.	In the Solution class&#39;s main method, you need to call the method that you previously implemented in the UsersView class.
+5.	The Model interface must declare the method that you previously implemented in the MainModel class.
+6.	In the FakeModel class, you need to throw an UnsupportedOperationException in the body of the method that was added to the Model interface.
+
+
+MVC (part 5)
+
+
+It&#39;s time to replace our fake Model with a real one that receives data from the DataSource.
+I&#39;ve added a service for working with users to the model.service package.
+You&#39;ll also find a Util utility class in the root of this task.
+
+1. Create a MainModel by analogy with FakeModel.
+
+2. Because the Model accesses services, create and initialize a UserService userService field in MainModel.
+
+3. Implement the loadUsers method:
+3.1. Get all users between levels 1 and 100. (Use the getUsersBetweenLevels(1, 100) method.)
+3.2. Put all of the users into dataModel.
+
+4. Update Solution.main: replace FakeModel with MainModel.
+An advantage of MVC is that it&#39;s easy to replace any part of the pattern at any time.
+
+
+
+MVC (part 5)
 
 
 To understand whether you&#39;re heading in the right direction, you need to see the data. Therefore,
@@ -35,17 +91,8 @@ User{name=&#39;B&#39;, id=2, level=1}
 Hooray! Let&#39;s keep going.
 
 
-Требования:
-1.	A UsersView class that implements the View interface must be created in the view package.
-2.	A private Controller controller field and corresponding setter must be created in the UsersView class.
-3.	The UsersView class&#39;s refresh method must be implemented according to the task conditions.
-4.	The UsersView class must have a public void fireShowAllUsersEvent() method that must call the onShowAllUsers() method on the controller.
-5.	A private UsersView usersView field and corresponding setter must be created in the Controller class. A getter must not be created for this field.
-6.	The userView object&#39;s refresh method must be called in the Controller class&#39;s onShowAllUsers() method with model.getDataModel() as the argument, after a call to the loadUsers() method.
-7.	Calling the main method must display information about each of the users that you added in the FakeModel class&#39;s loadUsers() method.
 
-
-MVC (part 3)
+MVC (part 5)
 
 
 1. Create a controller package, and create a Controller class inside it.
@@ -61,7 +108,7 @@ This class will receive requests from the client and notify the Model. The Model
 
 
 
-MVC (part 3)
+MVC (part 5)
 
 
 Hi! This task will cover the Model-View-Controller (MVC) pattern.

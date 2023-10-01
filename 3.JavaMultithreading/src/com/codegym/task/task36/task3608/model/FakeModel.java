@@ -5,7 +5,7 @@ import com.codegym.task.task36.task3608.bean.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FakeModel implements Model{
+public class FakeModel implements Model {
     private DataModel dataModel = new DataModel();
 
     @Override
@@ -21,5 +21,10 @@ public class FakeModel implements Model{
         userList.add(new User("C", 3, 1));
 
         dataModel.setUsers(userList);
+    }
+
+    @Override
+    public void loadDeletedUsers() {
+        throw new UnsupportedOperationException();
     }
 }
