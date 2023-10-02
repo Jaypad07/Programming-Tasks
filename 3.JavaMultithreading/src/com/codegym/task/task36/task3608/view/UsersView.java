@@ -14,12 +14,17 @@ public class UsersView implements View {
 
     @Override
     public void refresh(DataModel dataModel) {
-        System.out.println("All users:");
+        if (dataModel.isDisplayDeletedUserList()) {
+            System.out.println("All deleted users:");
+        }else System.out.println("All users:");
 
         for (User user : dataModel.getUsers()) {
             System.out.println("\t" + user);
         }
         System.out.println("===================================================");
+    }
+    public void fireOpenUserEditFormEvent(long id) {
+        controller.onOpenUserEditForm(id);
     }
 
     public void fireShowAllUsersEvent() {

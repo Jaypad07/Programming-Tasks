@@ -1,4 +1,113 @@
-taskKey="com.codegym.task.task36.task3608.big05"\n\nMVC (part 5)
+taskKey="com.codegym.task.task36.task3608.big09"\n\nMVC (part 9)
+
+
+This is the last task on MVC.
+
+1. Following the MVC pattern, do the following by analogy with how the previous methods were implemented:
+write the logic for updating a user. After the update operation, the list of users must be displayed.
+Assign the following methods to MVC classes:
+public void fireUserDataChangedEvent(String name, long id, int level)
+public void onChangeUserData(String name, long id, int level)
+public void changeUserData(String name, long id, int level)
+where name and level are the new values for the user with the selected id.
+Note: the method that you are going to add to the View needs to be added to EditUserView.
+
+2. Call fireUserDataChangedEvent in main before calling the fireShowDeletedUsersEvent() method.
+
+3. Add to the Model interface the method that you put in the Model, and implement it in FakeModel: throw an UnsupportedOperationException.
+
+
+Требования:
+1.	You need to determine the correct location for the fireUserDataChangedEvent(String name, long id, int level) method,  and implement it.
+2.	You need to determine the correct location for the onChangeUserData(String name, long id, int level) method, and implement it.
+3.	You need to determine the correct location for the void changeUserData(String name, long id, int level) method, and implement it.
+4.	In the main method, you need to call the fireUserDataChangedEvent(String, long, int) method before calling the fireShowDeletedUsersEvent() method.
+5.	The Model interface must declare the method that you previously implemented in the MainModel class.
+6.	In the FakeModel class, you need to throw an UnsupportedOperationException in the body of the method that was added to the Model interface.
+
+
+MVC (part 9)
+
+
+1. Following the MVC pattern, do the following by analogy with how the previous methods were implemented:
+write the logic for deleting a user. After a deletion operation, the list of users must be displayed.
+Assign the following methods to MVC classes:
+public void fireUserDeletedEvent(long id)
+public void onDeleteUser(long id)
+public void deleteUserById(long id)
+Note: the method that you are going to add to the View needs to be added to EditUserView.
+
+2. Call fireUserDeletedEvent(124L) in main before calling the fireShowDeletedUsersEvent() method.
+
+3. Refactor the MainModel class. Currently, some of the methods stop working properly when there are deleted users.
+Almost all the methods that require a list of users must work only with active users.
+Extract into a separate private List&lt;User&gt; getAllUsers() method the logic to get the list of all active users.
+You already have the ability to filter active users in the List&lt;User&gt; filterOnlyActiveUsers(List&lt;User&gt; allUsers) method.
+Refactor all the methods that use a list of users. They should use the list of active users.
+
+4. Add to the Model interface the method that you put in the Model, and implement it in FakeModel: throw an UnsupportedOperationException.
+
+
+
+MVC (part 9)
+
+
+1. Assign each of these methods to the correct MVC classes:
+
+public void onOpenUserEditForm(long userId) {
+...loadUserById(userId);
+...refresh(...getDataModel());
+}
+
+public void fireOpenUserEditFormEvent(long id) {
+...onOpenUserEditForm(id);
+}
+
+public void loadUserById(long userId) {
+User user = userService.getUsersById(userId);
+...setActiveUser(user);
+}
+
+!!!! The user sees the View with the list of users, clicks on one of them, and a request is sent to the server.
+We fetch new data and display a different View that is specific to the one selected user.
+Keep this in mind when implementing this task.
+
+2. In the main method, add the ability to open an edit form for the user with id 126 before the fireShowDeletedUsersEvent() method is called.
+
+3. Add to the Model interface the method that you put in the Model, and implement it in FakeModel: throw an UnsupportedOperationException.
+
+
+
+MVC (part 9)
+
+
+The functionality for displaying deleted users exists, but we don&#39;t have any deleted users. Let&#39;s fix that.
+Let&#39;s make a new view that will be responsible for editing a specific user.
+UsersView displays a list of users.
+EditUserView will display data about editing a specific user.
+For this, we first need the selected user.
+As with any data, we&#39;ll put it in DataModel.
+
+1. In DataModel, create a User activeUser field, along with a corresponding getter and setter (Alt+Insert -&gt; Getter and Setter).
+
+2. Create EditUserView by analogy with UsersView.
+Here&#39;s the logic for the refresh method:
+2.1. Display &quot;User to be edited:&quot;.
+2.2. On a new line, display a tab and then the active user.
+2.3. On a new line, display the following separator: &quot;===================================================&quot;.
+
+3. Create a EditUserView editUserView field and corresponding setter in the controller.
+
+When our data is displayed, it&#39;s not entirely clear whether we are displaying the list of users or the list of deleted users.
+Let&#39;s make the View display this information. All of the data to be displayed is stored in the Model. Therefore,
+4. In DataModel, create a boolean displayDeletedUserList field, along with a corresponding getter and setter.
+
+5. Change the UsersView class&#39;s refresh method so that it displays &quot;All users:&quot; or &quot;All deleted users:&quot;
+depending on the type of users in the list. Add the displayDeletedUserList change to the required methods of the model.
+
+
+
+MVC (part 9)
 
 
 The service has a method that returns all deleted users. Let&#39;s display them.
@@ -25,16 +134,8 @@ Add this to the correct methods on your own.
 3. Add the method that you put in the Model to the Model interface, and implement it in FakeModel: throw an UnsupportedOperationException.
 
 
-Требования:
-1.	You need to determine the correct location for the fireShowDeletedUsersEvent() method, and implement it.
-2.	You need to determine the correct location for the onShowAllDeletedUsers() method, and implement it.
-3.	You must determine the correct location for the loadDeletedUsers() method, and implement it.
-4.	In the Solution class&#39;s main method, you need to call the method that you previously implemented in the UsersView class.
-5.	The Model interface must declare the method that you previously implemented in the MainModel class.
-6.	In the FakeModel class, you need to throw an UnsupportedOperationException in the body of the method that was added to the Model interface.
 
-
-MVC (part 5)
+MVC (part 9)
 
 
 It&#39;s time to replace our fake Model with a real one that receives data from the DataSource.
@@ -51,108 +152,6 @@ You&#39;ll also find a Util utility class in the root of this task.
 
 4. Update Solution.main: replace FakeModel with MainModel.
 An advantage of MVC is that it&#39;s easy to replace any part of the pattern at any time.
-
-
-
-MVC (part 5)
-
-
-To understand whether you&#39;re heading in the right direction, you need to see the data. Therefore,
-1. In the view package, create a UsersView class that implements View. It will display the list of users.
-
-2. Create a controller field, and a corresponding setter, in UsersView.
-
-3. Implement the refresh method:
-3.1. Display the phrase &quot;All users:&quot;.
-3.2. Display all of the users in dataModel.
-Indent each user with a tab.
-3.3. Display the following visual separator at the end
-===================================================
-
-4. I&#39;m already interested in seeing what we&#39;ve got.
-Add to UsersView a public void fireShowAllUsersEvent() method that emulates a client event.
-Access the controller and call the appropriate method to display all users.
-
-5. The Solution class will emulate a user. Open the Solution class, go to the red method,
-and use IDEA&#39;s hot keys to create a usersView property (field).
-All you need is a setter. If you created a getter, delete it.
-
-6. Run main. Oops, nothing is displayed :(
-This is because the server sent the data, and it was updated in the DataModel, but the View doesn&#39;t know anything about it.
-The View can&#39;t update itself. The Controller does that.
-Go to the controller and update the View&#39;s data.
-Remember, the data is stored in the Model.
-
-7. Run main. I now have this output:
-All users:
-User{name=&#39;A&#39;, id=1, level=1}
-User{name=&#39;B&#39;, id=2, level=1}
-===================================================
-Hooray! Let&#39;s keep going.
-
-
-
-MVC (part 5)
-
-
-1. Create a controller package, and create a Controller class inside it.
-This class will receive requests from the client and notify the Model. The Model, in turn, will update the DataModel.
-
-2. Add a Model model field, along with a setter, to the controller.
-
-3. In the controller, create a public void onShowAllUsers() method that accesses the model and triggers the loading the users.
-
-4. Create a view package. Create a View interface inside it.
-
-5. Add two methods to the View interface: void refresh(DataModel dataModel) and void setController(Controller controller).
-
-
-
-MVC (part 5)
-
-
-Hi! This task will cover the Model-View-Controller (MVC) pattern.
-Together we are going to build an MVC architecture. Dive in deep to understand why you need to implement it the way that I show you.
-Read the additional literature that the professor will give you at the end of the level.
-You&#39;ll probably be asked about this pattern in an interview or will be given a task that will require you to implement it.
-
-Let&#39;s begin...
-You have two packages: bean, which has only one class called User, and dao,
-which contains database emulation code in the mock and UserDao packages. UserDao is a DAO layer (i.e. Database Access Object layer).
-It contains various methods for storing and retrieving objects from a database.
-A real application wouldn&#39;t have the line &quot;private DataSource dataSource = DataSource.getInstance()&quot;.
-I&#39;ve implemented DataSource as a singleton. In reality, you&#39;d have something more like this:
-@Autowired
-private DataSource dataSource;
-This framework you&#39;ll use in real applications will create the database object itself and initialize the dataSource field.
-
-Remember, services work with the DAO layer. No other classes touch the DAO. The business logic is described in services.
-Services retrieve data from the database using the DAO, process it, and hand it out to whoever requested the data.
-However, not all data is stored in a database. For example, a signed-in user will be stored in a special Model object.
-An object that contains data required to display information to the client is called the Model.
-Additionally, this Model object contains references to all of the required services.
-If there is a lot of data to display, then it is broken out into separate objects.
-
-Let&#39;s write an application that will display a list of users and do something with them, for example, update their data and delete them.
-
-1. Create a model package, and create a DataModel class inside it.
-DataModel is the entity that will store the data we need to display to the client.
-Create a List&lt;User&gt; users field, and a corresponding getter and setter. This will be the list of users to display.
-
-2. We should be able to use any model to get all of the data we need to display. So,
-in the model package, create a Model interface that has a DataModel getDataModel() method.
-
-3. Create a FakeModel class that implements Model in the model package. We&#39;re going to need this in the initial stage.
-Give it a DataModel dataModel field, and initialize it with the object.
-
-4. Create a void loadUsers() method in the Model interface.
-Implement it in FakeModel: use arbitrary data to initialize the list of users for dataModel. The data won&#39;t affect testing.
-I have the following data:
-User{name=&#39;A&#39;, id=1, level=1}
-User{name=&#39;B&#39;, id=2, level=1}
-I think you&#39;ll remember that all interface methods are public, so there&#39;s no need to indicate a modifier.
-Programmers often use fake data in early development. They implement code to get real data in the final stages.
-The hardcoded fake data replaces real objects.
 
 
 
